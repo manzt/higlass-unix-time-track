@@ -1,25 +1,25 @@
 {
-  "name": "higlass-time-interval-track",
-  "version": "0.1.8",
-  "description": "A HiGlass track showing time intervals.",
+  "name": "higlass-unix-time-track",
+  "version": "0.1.0",
+  "description": "A HiGlass track displaying unix epoch times converted to human readable dates.",
   "keywords": [
     "HiGlass",
     "Track"
   ],
-  "author": "Peter Kerpedjiev",
+  "author": "Trevor Manz",
   "license": "MIT",
   "contributors": [
     {
-      "name": "Peter Kerpedjiev",
-      "url": "http://github.com/pkerpedjiev"
+      "name": "Trevor Manz",
+      "url": "https://github.com/manzt"
     }
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/pkerpedjiev/higlass-time-interval-track.git"
+    "url": "https://github.com/manzt/higlass-unix-time-track.git"
   },
   "main": "src/index.js",
-  "unpkg": "dist/higlass-time-interval-track.min.js",
+  "unpkg": "dist/higlass-unix-time-track.min.js",
   "files": [
     "dist"
   ],
