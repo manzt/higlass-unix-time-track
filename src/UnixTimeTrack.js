@@ -23,7 +23,7 @@ function formatTime(seconds, tickDiff) {
   ].filter(a => a).join(':');
 }
 
-const TimeIntervalTrack = (HGC, ...args) => {
+const UnixTimeTrack = (HGC, ...args) => {
   if (!new.target) {
     throw new Error(
       'Uncaught TypeError: Class constructor cannot be invoked without "new"',
@@ -33,7 +33,7 @@ const TimeIntervalTrack = (HGC, ...args) => {
   // HiGlass Code
   const { PIXI } = HGC.libraries;
 
-  class TimeIntervalTrackClass extends HGC.tracks.TiledPixiTrack {
+  class UnixTimeTrackClass extends HGC.tracks.TiledPixiTrack {
     constructor(
       scene, trackConfig, dataConfig, handleTilesetInfoReceived, animate,
     ) {
@@ -136,7 +136,7 @@ const TimeIntervalTrack = (HGC, ...args) => {
         const xPos = this.position[0] + this._xScale(tick / scale);
 
         graphics.moveTo(xPos, this.position[1] + tickStartY);
-        graphics.lineTo(xPos, this.position[1] + tickEndY); 
+        graphics.lineTo(xPos, this.position[1] + tickEndY);
 
         this.axisTexts[i].x = xPos;
         this.axisTexts[i].y = this.position[1] + tickEndY + betweenTickAndText;
@@ -155,18 +155,18 @@ const TimeIntervalTrack = (HGC, ...args) => {
     }
   }
 
-  return new TimeIntervalTrackClass(...args);
+  return new UnixTimeTrackClass(...args);
 };
 
-TimeIntervalTrack.config = {
-  type: 'time-interval-track',
-  datatype: ['time-interval'],
+UnixTimeTrack.config = {
+  type: 'unix-time-track',
+  datatype: [],
   orientation: '1d-horizontal',
-  name: 'TimeInterval',
+  name: 'UnixTime',
   availableOptions: [
   ],
   defaultOptions: {
   },
 };
 
-export default TimeIntervalTrack;
+export default UnixTimeTrack;
