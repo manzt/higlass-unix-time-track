@@ -59,6 +59,9 @@
   },
   "dependencies": {
     "d3-format": "^1.2.2",
+    "d3-scale": "^2.1.0",
+    "d3-time": "^1.0.8",
+    "d3-time-format": "^2.1.1",
     "higlass-register": "^0.1.0"
   }
 }
