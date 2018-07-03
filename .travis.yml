@@ -22,7 +22,7 @@ deploy:
         repo: manzt/higlass-unix-time-track
   - provider: npm
     skip_cleanup: true
-    email: pkerpedjiev@gmail.com
+    email: trevmanz94@gmail.com
     api_key:
       secure: o5MzH+mx2GATdK+o6CrHbcjKkyollM7ZlxWkC8UQCAEvkNfao65Z7iR61sHcPKGZDz2n2UOc9Llx2KIbxK0CBSYTRxu4QO4U7TRqu7XXbGyFoxeC+A70A7pVQgG9zdAVrIeIkrzdQdKhsLWb0RL6U+tVaQ0qVQNPxW+5W9ns7PEkygaHu2URQGq/RlDKvRZqJRHgtpdVgv/S/qWBUc6BCHPjbKx/JSBjPjc/U2shVcXcVuNpZsfDgs93BjlIYHDRYoflA7498bJHEBlvtzrPvyBBmWviPzmEWmbCC/CVnWzYKS3fzXN02Q7N9pMOw367/wySW3D99Z+Dqb5h8o96GHv63unJXv0xvtUonxEhsv+bhGbhmBt6diFtyPL0NVnnyrO60ptDhqyae3ZsKTSud4FG2o/5rY1uzxtr4xxDfH7b/OLKGPg94c2FPLa+3aNUBvRseHPYWhZ8qgyI/H3ApFlZyWPJMTxRK+tPNEywQ5gn5CgNBud3cnw8qHs+aoI6BFNGCB0StcsGsGlADtr+2hFn/jv+lnQucs7iMyaHQGyR9nz+VhReze6cfyuPua0VCK8HQ6nG+a5TmkeWyQfO7VevWQIiWNyLP8GoeHqOKD9DzRojedufEOZ5YUOjAru08cbG3s+zjrSpj06aNDihLrzO4n7fgm9YPScWMunVTrg=
     on:
