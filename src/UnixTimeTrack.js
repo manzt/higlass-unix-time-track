@@ -1,6 +1,5 @@
 import { scaleUtc } from 'd3-scale';
 import { utcFormat } from 'd3-time-format';
-import { utcYear, utcMonth, utcWeek, utcDay, utcHour, utcMinute, utcSecond } from 'd3-time';
 
 const durationSecond = 1000;
 const durationMinute = durationSecond * 60;
@@ -9,44 +8,29 @@ const durationDay = durationHour * 24;
 const durationWeek = durationDay * 7;
 const durationYear = durationDay * 365;
 
-const formatMillisecond = utcFormat('.%L');
-const formatSecond = utcFormat(':%S');
-const formatMinute = utcFormat('%I:%M');
-const formatHour = utcFormat('%I %p');
-const formatDay = utcFormat('%a %d');
-const formatWeek = utcFormat('%b %d');
-const formatMonth = utcFormat('%b');
-const formatYear = utcFormat('%Y');
+const formatSecond = utcFormat('%Y %b %d (%I:%M:%S %p)');
+const formatMinute = utcFormat('%Y %b %d (%I:%M %p)');
+const formatHour = utcFormat('%Y %b %d (%I %p)');
+const formatDay = utcFormat('%Y %b %d');
+const formatWeek = utcFormat('%Y %b');
+const formatMonth = utcFormat('%Y');
+const formatYear = utcFormat('');
 
-function formatTime(date) {
-  return (utcSecond(date) < date ? formatMillisecond
-    : utcMinute(date) < date ? formatSecond
-      : utcHour(date) < date ? formatMinute
-        : utcDay(date) < date ? formatHour
-          : utcMonth(date) < date ? (utcWeek(date) < date ? formatDay : formatWeek)
-            : utcYear(date) < date ? formatMonth
+function timeFormat(date, timeDelta) {
+  return (timeDelta < durationSecond ? formatSecond
+    : timeDelta < durationMinute ? formatMinute
+      : timeDelta < durationHour ? formatHour
+        : timeDelta < durationDay ? formatDay
+          : timeDelta < durationWeek ? formatWeek
+            : timeDelta < durationYear ? formatMonth
               : formatYear)(date);
 }
 
-const fmtSecond = utcFormat('%Y %b %d (%I:%M:%S %p)');
-const fmtMinute = utcFormat('%Y %b %d (%I:%M %p)');
-const fmtHour = utcFormat('%Y %b %d (%I %p)');
-const fmtDay = utcFormat('%Y %b %d');
-const fmtWeek = utcFormat('%Y %b');
-const fmtMonth = utcFormat('%Y');
-const fmtYear = utcFormat('');
-
-function centerFormat(date, timeDelta) {
-  return (timeDelta < durationSecond ? fmtSecond
-    : timeDelta < durationMinute ? fmtMinute
-      : timeDelta < durationHour ? fmtHour
-        : timeDelta < durationDay ? fmtDay
-          : timeDelta < durationWeek ? fmtWeek
-            : timeDelta < durationYear ? fmtMonth
-              : fmtYear)(date);
-}
-
-
+const tickHeight = 10;
+const textHeight = 10;
+const betweenTickAndText = 10;
+const betweenCenterTickAndText = 20;
+3
 const UnixTimeTrack = (HGC, ...args) => {
   if (!new.target) {
     throw new Error(
@@ -68,20 +52,41 @@ const UnixTimeTrack = (HGC, ...args) => {
         trackConfig.options,
         animate,
       );
-
       this.axisTexts = [];
       this.endpointsTexts = [];
       this.axisTextFontFamily = 'Arial';
       this.axisTextFontSize = 12;
+      this.timeScale = this._xScale;
+      this.context = new PIXI.Text(
+        'sample',
+        {
+          fontSize: `${this.axisTextFontSize}px`,
+          fontFamily: this.axisTextFontFamily,
+          fill: 'black',
+        },
+      );
+      this.context.anchor.y = 0.4;
+      this.context.anchor.x = 0.5;
+      this.pMain.addChild(this.context);
     }
 
+    updateTimeScale() {
+      const linearScale = this._xScale.copy();
+      const timeScale = scaleUtc()
+        .domain(linearScale.domain().map(d => d * 1000))
+        .range(linearScale.range());
+      this.timeScale = timeScale;
+      return timeScale;
+    }
 
-    createTimeTexts(tickValues) {
+    createAxisTexts() {
+      const ticks = this.timeScale.ticks();
+      const tickFormat = this.timeScale.tickFormat();
+
       let i = 0;
-      const color = 'black';
 
-      while (i < tickValues.length) {
-        const tick = tickValues[i];
+      while (i < ticks.length) {
+        const tick = ticks[i];
 
         while (this.axisTexts.length <= i) {
           const newText = new PIXI.Text(
@@ -89,107 +94,64 @@ const UnixTimeTrack = (HGC, ...args) => {
             {
               fontSize: `${this.axisTextFontSize}px`,
               fontFamily: this.axisTextFontFamily,
-              fill: color,
+              fill: 'black',
             },
           );
           this.axisTexts.push(newText);
           this.pMain.addChild(newText);
         }
 
-        this.axisTexts[i].text = formatTime(tick);
+        this.axisTexts[i].text = tickFormat(tick);
         this.axisTexts[i].anchor.y = 0.5;
         this.axisTexts[i].anchor.x = 0.5;
         i++;
       }
 
-      while (this.axisTexts.length > tickValues.length) {
+      while (this.axisTexts.length > ticks.length) {
         const lastText = this.axisTexts.pop();
         this.pMain.removeChild(lastText);
       }
     }
 
-    createEndpoints(tickValues, tickDiff) {
-      let i = 0;
-      const color = 'black';
+    drawTicks(tickStartY, tickEndY) {
+      this.timeScale.ticks().forEach((tick, i) => {
+        const xPos = this.position[0] + this.timeScale(tick);
 
-      while (i < tickValues.length) {
-        const tick = tickValues[i];
-
-        while (this.endpointsTexts.length <= i) {
-          const newText = new PIXI.Text(
-            tick,
-            {
-              fontSize: `${this.axisTextFontSize}px`,
-              fontFamily: this.axisTextFontFamily,
-              fill: color,
-            },
-          );
-          this.endpointsTexts.push(newText);
-          this.pMain.addChild(newText);
-        }
-
-        this.endpointsTexts[i].text = centerFormat(tick, tickDiff);
-        this.endpointsTexts[i].anchor.y = 0;
-        this.endpointsTexts[i].anchor.x = 0.5;
-        i++;
-      }
-
-      while (this.endpointsTexts.length > tickValues.length) {
-        const lastText = this.endpointsTexts.pop();
-        this.pMain.removeChild(lastText);
-      }
-    }
-
-    createTimeScale() {
-      const linearScale = this._xScale.copy();
-      const timeScale = scaleUtc()
-        .domain(linearScale.domain().map(d => d * 1000))
-        .range(linearScale.range());
-      return timeScale;
-    }
-
-
-    draw() {
-      const timeScale = this.createTimeScale();
-      const ticks = timeScale.ticks();
-      this.createTimeTexts(ticks);
-      const diff = (timeScale.domain()[1] - timeScale.domain()[0]) / 2;
-      const endpoints = [+timeScale.domain()[0] + diff];
-      const tickDiff = +ticks[1] - +ticks[0];
-      this.createEndpoints(endpoints, tickDiff);
-
-      const tickHeight = 10;
-      const endpointHeight = 25;
-      const textHeight = 10;
-      const betweenTickAndText = 10;
-
-      const tickStartY = (this.dimensions[1] - tickHeight - textHeight - betweenTickAndText) / 2;
-      const tickEndY = tickStartY + tickHeight;
-      const endpointEndY = tickStartY + endpointHeight;
-
-      const graphics = this.pMain;
-      graphics.clear();
-      graphics.lineStyle(1, 0x000000, 1);
-
-      ticks.forEach((tick, i) => {
-        const xPos = this.position[0] + timeScale(tick);
-
-        graphics.moveTo(xPos, this.position[1] + tickStartY);
-        graphics.lineTo(xPos, this.position[1] + tickEndY);
+        this.pMain.moveTo(xPos, this.position[1] + tickStartY);
+        this.pMain.lineTo(xPos, this.position[1] + tickEndY);
 
         this.axisTexts[i].x = xPos;
         this.axisTexts[i].y = this.position[1] + tickEndY + betweenTickAndText;
       });
+    }
 
-      endpoints.forEach((endpoint, i) => {
-        const xPos = this.position[0] + timeScale(endpoint);
+    drawContext(tickStartY, tickEndY) {
+      const ticks = this.timeScale.ticks();
+      const center = (+this.timeScale.domain()[1] + +this.timeScale.domain()[0]) / 2;
+      const tickDiff = +ticks[1] - +ticks[0];
 
-        graphics.moveTo(xPos, this.position[1] + tickStartY);
-        graphics.lineTo(xPos, this.position[1] + tickEndY + 2);
+      const xPos = this.position[0] + this.timeScale(center);
+      this.context.text = timeFormat(center, tickDiff);
+      this.context.x = xPos;
+      this.context.y = this.position[1] + tickEndY + betweenCenterTickAndText;
+      if (this.context.text !== ' ') {
+        this.pMain.moveTo(xPos, this.position[1] + tickStartY);
+        this.pMain.lineTo(xPos, this.position[1] + tickEndY);
+      }
+    }
 
-        this.endpointsTexts[i].x = xPos;
-        this.endpointsTexts[i].y = this.position[1] + endpointEndY;
-      });
+    draw() {
+      const graphics = this.pMain;
+      graphics.clear();
+      graphics.lineStyle(1, 0x000000, 1);
+
+      const tickStartY = (this.dimensions[1] - tickHeight - textHeight - betweenTickAndText) / 2;
+      const tickEndY = tickStartY + tickHeight;
+
+      this.updateTimeScale();
+      this.createAxisTexts();
+      this.drawTicks(tickStartY, tickEndY);
+      this.drawContext(tickStartY, tickEndY);
     }
 
     /* --------------------------- Getter / Setter ---------------------------- */
