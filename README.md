@@ -1,11 +1,11 @@
-# Time Interval Track for HiGlass
+# Unix Time Track for HiGlass
 
-> Display time intervals in the format HH:MM:ss in HiGlass.
+> Display human readable unix epoch time.
 
 [![HiGlass](https://img.shields.io/badge/higlass-👍-red.svg?colorB=0f5d92)](http://higlass.io)
 [![Build Status](https://img.shields.io/travis/pkerpedjiev/higlass-time-interval-track/master.svg?colorB=0f5d92)](https://travis-ci.org/pkerpedjiev/higlass-time-interval-track)
 
-![HiGlass showing times](/screenshot.png?raw=true "Times since the beginning of an event visible as an axis")
+![HiGlass showing times](/screenshot.png?raw=true)
 
 **Note**: This is the source code for the time interval track only! You might want to check out the following repositories as well:
 
@@ -16,7 +16,7 @@
 ## Installation
 
 ```
-npm install higlass-time-interval-track
+npm install higlass-unix-time-track
 ```
 
 ## Usage
@@ -24,7 +24,7 @@ npm install higlass-time-interval-track
 1. Make sure you load this track prior to `hglib.js`. For example:
 
 ```
-<script src="higlass-time-interval-track.js"></script>
+<script src="higlass-unix-time-track.js"></script>
 <script src="hglib.js"></script>
 <script>
   ...
@@ -40,7 +40,7 @@ npm install higlass-time-interval-track
     server: 'http://localhost:8001/api/v1',
     tilesetUid: 'time-interval.json',
     uid: 'blah',
-    type: 'time-interval-track',
+    type: 'unix-time-track',
     options: {
 
     },
@@ -56,7 +56,7 @@ Take a look at [`src/index.html`](src/index.html) for an example.
 ### Installation
 
 ```bash
-$ git clone https://github.com/pkerpedjiev/higlass-time-interval-track
+$ git clone https://github.com/manzt/higlass-unix-time-track && cd unix-time-track
 $ npm install
 ```
 
