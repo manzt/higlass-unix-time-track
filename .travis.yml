@@ -14,17 +14,16 @@ deploy:
   - provider: releases
     skip_cleanup: true
     api_key:
-        secure: d0v6K+t4zEj5/Q50jWIx8fDbeZUoxe5gzh1OZu32dRGpcxwEQapS1MVxy/vn47t7JtDEVh72ukfqCdI0liuhObvW0xUZnsm7Ib0Z7dWgAChIz3nh5Sj+bNVrmefNliMWUTNSVbzrMJiHqKkXGor1yzKVrIV1HrKPvsceOVrMAS/txz0uowsi6YCIwdwscJvTPtKPfHq/653oPfItG78XgbQ42Jh4h7snuZH8K2WyB/hc5jmL6sUGfYRk4qbYE5iuKNN4Ckfe0PKg/O+FauZIDwhGJUnME1LnN33mLPhUUJ+Z4zAdPxcwfBBo811qId/aa/5RLy9bG6Ur+yZFZUhakJPALX/GrWGxJs8K4Ll2wDXoAOsPwZ4AlSFAy726ew/NZL6PVa/SNbybUyxrHhEJOyxFADUyvsAlSds9uN5qMKoNgGOV2iuDFlOTdZpTSLiL1lLAjf4qFKvB/hdWeuMcQ49DL+ISEeRGUV8GgWrObbL2Ax1YeDZ0lZnQRQQeuGEIjVUQHOvQXY6dY/sEztcaLvQ3E5Lp7iFnzjhKGSRY8/QAMRwDSyMl6dBrOIiYI7LzMLak/hyRgm8WjCbQ4vNIlHYC9OCIJ5RtpckTmsiHKYQxy3Ov+ufTRjZVBMGgSUMR3x9YJZ4UKcwnPMd+v5VIvTcDTkW/gYb2vcyLUHD3Bc4=
+      secure: flHLoht9nbaLCAnkonT472wVjd3dH55ngv8yWaOI8XKJvWrqAb/AjMiVeCMZ74nqZTacJjYczQIz6lhwcRBM61lfrfJZT5P80gcKiuvlpS1fBc/8/rZA3Y82fOu1iX8gwWEaWzpD8wEqkUjcdpfWMXqWlFP+SUJojACTB1kdDdmPS7wY1R5l3pkj/L1aORytDM8oPWh9VZc7bIxwlOXAOvFOE8TgPXEafmKlYYy/9E6awVRByd/dYH6Ltaf1SiaS+3KU+D5UEu4Qf3FY2Ww/r6eHMK5UQVd7KtNFSTOcKLrNhFJUWa/yiBipo3JdSP8ab+AuOjdptJ/WqdvkPEQtOebQvlFgukjTkPWuec7ynDqiDaiInn7JJB8j19WIzOmF+qGtjBcugstwpA+/8eZIaQugMxAEHG6kTdU+iprc/YXHLynk/xUAQGWByG/AW7NDz8nKVsjl/3juP5y8kTOQ7DaZDOfGGKoStMaPz/4U9js9Wjug1zgEHxoNRUsUIwnguq1AZpjI9Vt0/judtJV2vbHJQrP3zeiY0EIIevzN2Q9/LCesY2uriT6Pi/quxlV1S6Fs+UAvWH9fbfn1yuM3WX7z11fKTdUUM+IlRh1chUN2BOkeUEs53c6iV6+JVcOH2APFstXRvFFYga0MsqvECxuoLrdXzTMIgpLg0tGb1Nw=
     file: dist.zip
     on:
-        tags: true
-        branch: master
-        repo: manzt/higlass-unix-time-track
+      tags: true
+      branch: master
+      repo: manzt/higlass-unix-time-track
   - provider: npm
-    skip_cleanup: true
     email: trevmanz94@gmail.com
     api_key:
-      secure: o5MzH+mx2GATdK+o6CrHbcjKkyollM7ZlxWkC8UQCAEvkNfao65Z7iR61sHcPKGZDz2n2UOc9Llx2KIbxK0CBSYTRxu4QO4U7TRqu7XXbGyFoxeC+A70A7pVQgG9zdAVrIeIkrzdQdKhsLWb0RL6U+tVaQ0qVQNPxW+5W9ns7PEkygaHu2URQGq/RlDKvRZqJRHgtpdVgv/S/qWBUc6BCHPjbKx/JSBjPjc/U2shVcXcVuNpZsfDgs93BjlIYHDRYoflA7498bJHEBlvtzrPvyBBmWviPzmEWmbCC/CVnWzYKS3fzXN02Q7N9pMOw367/wySW3D99Z+Dqb5h8o96GHv63unJXv0xvtUonxEhsv+bhGbhmBt6diFtyPL0NVnnyrO60ptDhqyae3ZsKTSud4FG2o/5rY1uzxtr4xxDfH7b/OLKGPg94c2FPLa+3aNUBvRseHPYWhZ8qgyI/H3ApFlZyWPJMTxRK+tPNEywQ5gn5CgNBud3cnw8qHs+aoI6BFNGCB0StcsGsGlADtr+2hFn/jv+lnQucs7iMyaHQGyR9nz+VhReze6cfyuPua0VCK8HQ6nG+a5TmkeWyQfO7VevWQIiWNyLP8GoeHqOKD9DzRojedufEOZ5YUOjAru08cbG3s+zjrSpj06aNDihLrzO4n7fgm9YPScWMunVTrg=
+      secure: cyFBoYl2FnYCYudzJDuBMHJHUla9oA2wB3e/6DSChY1JFPEHdyiOmT0sEY/I8WsIKjdJDFe4IoWhriH84JobUo7syK1jaPCOgYuot67Ktn4gq0kpgohgJZ2QVUnc2G8FIy1goXtOP0TKS8M7/isaoCZPI26LVYgcQNsSY1zpoexoSp89qMx0BarGtiBjc71jRW2DVM2RxrZtxb/svQTx4clzV1MiZHpS6g6c+EwIx7rLF8uK7su/Mfs7sWHKepmHpQb0avOoUWMzjbFliaVo4o0DdMTxrbD11CG23JW77lGHrU9a0xVyjmjUdVd3WaKQ4H5bxs9eaMW8Vz/wvELL/exfAavPtyak9WJRuX/FdHmQaK2Zuhv5aw0IsWzawiO/aqVr8Y9cX32k/RtQJXSB775dhs/tkw4A5DbQLgGlU85M14+ltcesuidea5ZsBU/P1+KYFDlK3C7scx3ClbQHJgLrEyf+lx9aDcBipHj2K17RO3USDH8UDQDJ8W2LkUdc734exLghqKKUXN+XgWJwmHC6VK9vI8SzxMTw9+CnRvPgZd11QmVrRdhTS9gl3D5uzxfF2rRcnHY9opUaNuJq/xz5NwASFpFDexoLnyI+77Xe/LamNvPCFULi4akcDA+qwU5U3NWL5J2DZmPWDK9ol2G4XJtONhvhwUeeAhHq/Uo=
     on:
       branch: master
       tags: true
