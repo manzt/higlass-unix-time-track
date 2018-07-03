@@ -19,7 +19,7 @@ deploy:
     on:
         tags: true
         branch: master
-        repo: pkerpedjiev/higlass-time-interval-track
+        repo: manzt/higlass-unix-time-track
   - provider: npm
     skip_cleanup: true
     email: pkerpedjiev@gmail.com
@@ -28,4 +28,4 @@ deploy:
     on:
       branch: master
       tags: true
-      repo: pkerpedjiev/higlass-time-interval-track
+      repo: manzt/higlass-unix-time-track
