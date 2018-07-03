@@ -1,15 +1,14 @@
 import { scaleUtc } from 'd3-scale';
 import { utcFormat } from 'd3-time-format';
 import { utcYear, utcMonth, utcWeek, utcDay, utcHour, utcMinute, utcSecond } from 'd3-time';
-// Keep duration of 1000 here although conversion is made belwo
-// const durationSecond = 1000;
-// const durationMinute = durationSecond * 60;
-// const durationHour = durationMinute * 60;
-// const durationDay = durationHour * 24;
-// const durationWeek = durationDay * 7;
-// const durationMonth = durationDay * 30;
-// const durationYear = durationDay * 365;
-//
+
+const durationSecond = 1000;
+const durationMinute = durationSecond * 60;
+const durationHour = durationMinute * 60;
+const durationDay = durationHour * 24;
+const durationWeek = durationDay * 7;
+const durationYear = durationDay * 365;
+
 const formatMillisecond = utcFormat('.%L');
 const formatSecond = utcFormat(':%S');
 const formatMinute = utcFormat('%I:%M');
@@ -28,6 +27,25 @@ function formatTime(date) {
             : utcYear(date) < date ? formatMonth
               : formatYear)(date);
 }
+
+const fmtSecond = utcFormat('%Y %b %d (%I:%M:%S %p)');
+const fmtMinute = utcFormat('%Y %b %d (%I:%M %p)');
+const fmtHour = utcFormat('%Y %b %d (%I %p)');
+const fmtDay = utcFormat('%Y %b %d');
+const fmtWeek = utcFormat('%Y %b');
+const fmtMonth = utcFormat('%Y');
+const fmtYear = utcFormat('');
+
+function centerFormat(date, timeDelta) {
+  return (timeDelta < durationSecond ? fmtSecond
+    : timeDelta < durationMinute ? fmtMinute
+      : timeDelta < durationHour ? fmtHour
+        : timeDelta < durationDay ? fmtDay
+          : timeDelta < durationWeek ? fmtWeek
+            : timeDelta < durationYear ? fmtMonth
+              : fmtYear)(date);
+}
+
 
 const UnixTimeTrack = (HGC, ...args) => {
   if (!new.target) {
@@ -90,7 +108,7 @@ const UnixTimeTrack = (HGC, ...args) => {
       }
     }
 
-    createEndpoints(tickValues) {
+    createEndpoints(tickValues, tickDiff) {
       let i = 0;
       const color = 'black';
 
@@ -110,7 +128,7 @@ const UnixTimeTrack = (HGC, ...args) => {
           this.pMain.addChild(newText);
         }
 
-        this.endpointsTexts[i].text = formatYear(tick);
+        this.endpointsTexts[i].text = centerFormat(tick, tickDiff);
         this.endpointsTexts[i].anchor.y = 0;
         this.endpointsTexts[i].anchor.x = 0.5;
         i++;
@@ -135,11 +153,10 @@ const UnixTimeTrack = (HGC, ...args) => {
       const timeScale = this.createTimeScale();
       const ticks = timeScale.ticks();
       this.createTimeTexts(ticks);
-      const diff = (timeScale.domain()[1] - timeScale.domain()[0]) * 0.01;
-
-      const endpoints = [+timeScale.domain()[0] + diff, +timeScale.domain()[1] - diff];
-      this.createEndpoints(endpoints);
-      const graphics = this.pMain;
+      const diff = (timeScale.domain()[1] - timeScale.domain()[0]) / 2;
+      const endpoints = [+timeScale.domain()[0] + diff];
+      const tickDiff = +ticks[1] - +ticks[0];
+      this.createEndpoints(endpoints, tickDiff);
 
       const tickHeight = 10;
       const endpointHeight = 25;
@@ -150,6 +167,7 @@ const UnixTimeTrack = (HGC, ...args) => {
       const tickEndY = tickStartY + tickHeight;
       const endpointEndY = tickStartY + endpointHeight;
 
+      const graphics = this.pMain;
       graphics.clear();
       graphics.lineStyle(1, 0x000000, 1);
 
@@ -167,7 +185,7 @@ const UnixTimeTrack = (HGC, ...args) => {
         const xPos = this.position[0] + timeScale(endpoint);
 
         graphics.moveTo(xPos, this.position[1] + tickStartY);
-        graphics.lineTo(xPos, this.position[1] + endpointEndY);
+        graphics.lineTo(xPos, this.position[1] + tickEndY + 2);
 
         this.endpointsTexts[i].x = xPos;
         this.endpointsTexts[i].y = this.position[1] + endpointEndY;
