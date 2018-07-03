@@ -30,7 +30,7 @@ const tickHeight = 10;
 const textHeight = 10;
 const betweenTickAndText = 10;
 const betweenCenterTickAndText = 20;
-3
+
 const UnixTimeTrack = (HGC, ...args) => {
   if (!new.target) {
     throw new Error(
