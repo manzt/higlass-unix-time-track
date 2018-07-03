@@ -3,7 +3,7 @@
 > Display human readable unix epoch time.
 
 [![HiGlass](https://img.shields.io/badge/higlass-👍-red.svg?colorB=0f5d92)](http://higlass.io)
-[![Build Status](https://img.shields.io/travis/manzt/higlass-unix-time-track/master.svg?colorB=0f5d92)](https://travis-ci.org/higlass-unix-time-track)
+[![Build Status](https://travis-ci.org/manzt/higlass-unix-time-track.svg?branch=master)](https://travis-ci.org/manzt/higlass-unix-time-track)
 
 ![HiGlass showing times](/screenshot.png?raw=true)
 
