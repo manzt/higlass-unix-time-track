@@ -8,8 +8,8 @@ const UnminifiedWebpackPlugin = require('unminified-webpack-plugin');
 
 module.exports = {
   output: {
-    filename: 'unix-time-track.min.js',
-    library: 'unix-time-track',
+    filename: 'higlass-unix-time-track.min.js',
+    library: 'higlass-unix-time-track',
     libraryTarget: 'umd',
     path: path.resolve(__dirname, 'dist'),
   },
