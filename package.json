@@ -1,6 +1,6 @@
 {
   "name": "higlass-unix-time-track",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A HiGlass track displaying unix epoch times converted to human readable dates.",
   "keywords": [
     "HiGlass",
