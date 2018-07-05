@@ -56,7 +56,7 @@ Take a look at [`src/index.html`](src/index.html) for an example.
 ### Installation
 
 ```bash
-$ git clone https://github.com/manzt/higlass-unix-time-track && cd unix-time-track
+$ git clone https://github.com/manzt/higlass-unix-time-track && cd higlass-unix-time-track
 $ npm install
 ```
 
