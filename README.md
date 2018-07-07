@@ -7,7 +7,7 @@
 
 ![HiGlass showing times](/screenshot.png?raw=true)
 
-**Note**: This is the source code for the time interval track only! You might want to check out the following repositories as well:
+**Note**: This is the source code for the unix time track only! You might want to check out the following repositories as well:
 
 - HiGlass viewer: https://github.com/hms-dbmi/higlass
 - HiGlass server: https://github.com/hms-dbmi/higlass-server
@@ -49,7 +49,7 @@ npm install higlass-unix-time-track
 }
 ```
 
-Take a look at [`src/index.html`](src/index.html) for an example.
+Take a look at [`src/index.html`](src/index.html) for an example. (The unix time track does not require a dataset, so the server url acts as a placeholder in this view config. A track will not load without a server url. To configure a custom track for your own dataset, start a local [HiGlass Server](https://github.com/hms-dbmi/higlass-server).)
 
 ## Development
 
