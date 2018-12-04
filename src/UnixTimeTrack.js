@@ -42,16 +42,8 @@ const UnixTimeTrack = (HGC, ...args) => {
   const { PIXI } = HGC.libraries;
 
   class UnixTimeTrackClass extends HGC.tracks.TiledPixiTrack {
-    constructor(
-      scene, trackConfig, dataConfig, handleTilesetInfoReceived, animate,
-    ) {
-      super(
-        scene,
-        dataConfig,
-        handleTilesetInfoReceived,
-        trackConfig.options,
-        animate,
-      );
+    constructor(context, options) {
+      super(context, options);
       this.axisTexts = [];
       this.endpointsTexts = [];
       this.axisTextFontFamily = 'Arial';
